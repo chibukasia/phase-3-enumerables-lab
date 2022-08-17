@@ -13,12 +13,18 @@ end
 # with the names of each spicy food
 def get_names(spicy_foods)
   # your code here
+  food_names = spicy_foods.collect do |food|
+    food[:name]
+  end
+  food_names
 end
 
+get_names(spicy_foods)
 # given an array of spicy foods, **return an array of hashes** 
 # where the heat level of the food is greater than 5
 def spiciest_foods(spicy_foods)
   # your code here
+  new_spicy_foods = spicy_foods.select {|food| food[:heat_level] > 5}
 end
 
 # given an array of spicy foods, **output to the terminal**
@@ -28,18 +34,24 @@ end
 # "hello" * 3 == "hellohellohello"
 def print_spicy_foods(spicy_foods)
   # your code here
+  spicy_foods.map do |food|
+    heat_symbol = "🌶"
+    puts food[:name] + " " + "(#{food[:cuisine]}) | Heat Level: " + heat_symbol  * food[:heat_level]
+  end
 end
 
 # given an array of spicy foods and a string representing a cuisine, **return a single hash**  
 # for the spicy food whose cuisine matches the cuisine being passed to the method
 def get_spicy_food_by_cuisine(spicy_foods, cuisine)
   # your code here
+  spicy_foods.find{|food| food[:cuisine]==cuisine}
 end
 
 # Given an array of spicy foods, **return an array of hashes** 
 # sorted by heat level from lowest to highest
 def sort_by_heat(spicy_foods)
   # your code here
+  spicy_foods.sort_by {|food| food[:heat_level] }
 end
 
 # given an array of spicy foods, output to the terminal ONLY 
@@ -48,10 +60,28 @@ end
 # HINT: Try to use methods you've already written to solve this!
 def print_spiciest_foods(spicy_foods)
   # your code here
+  new_spicy_foods = spicy_foods.select do |food|
+    food[:heat_level] > 5
+  end 
+  ju = new_spicy_foods.map do |foo|
+    heat_symbol = "🌶"
+    foo[:name] + " " + "(#{foo[:cuisine]}) | Heat Level: " + heat_symbol  * foo[:heat_level]
+  end
+  puts ju
 end
 
 # given an array of spicy foods, return an integer representing 
 # the average heat level of all the spicy foods in the array
 def average_heat_level(spicy_foods)
   # your code here
+  total = spicy_foods.sum {|food| food[:heat_level]}
+  array_length = spicy_foods.length
+  total / array_length
 end
+
+# average_heat_level(spicy_foods)
+
+heat_symbol = "🌶"
+#puts heat_symbol * 5
+
+print_spiciest_foods (spicy_foods)
